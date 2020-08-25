@@ -19,6 +19,7 @@
 #include "..\drivers\elf.h"
 #include "..\drivers\memory.h"
 #include "..\drivers\sd.h"
+#include "..\drivers\console.h"
 
 FATFS FatFs;   // Work area (file system object) for logical drive
 
@@ -39,6 +40,7 @@ int main (void)
   uint8_t *boot_file_buf = (uint8_t *)(get_ddr_base()) + DDR_SIZE - MAX_FILE_SIZE; // at the end of DDR space
   uint8_t *memory_base = (uint8_t *)(get_ddr_base());
 
+  cons_init(); //initialize consele
 
   printf("=============== Minisys Rocket Chip ===============\n\r", 0);
   printf("=============== DDR TEST ===============\n\r", 0);

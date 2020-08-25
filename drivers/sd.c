@@ -1,8 +1,8 @@
 // See LICENSE for license details.
 
 #include "sd.h"
-#include <types.h>
-#include <printf.h>
+#include "..\inc\types.h"
+#include "..\inc\printf.h"
 
 #define GetBit(r, p) (((r) & (1 <<p)) >> p)
 
@@ -11,17 +11,6 @@ volatile uint32_t *spi_base_ptr = (uint32_t *)(SPI_BASE);
 void spi_init() {
   uint32_t resp;
 
-  // power off SD
-  printf("\n\r****Pull Out SD Card Now!****\n\r", 0);
-  for (uint32_t delay_i = 0; delay_i < 15; delay_i++) {
-    printf("=", 0);
-    for (uint32_t delay_j = 0; delay_j < 300; delay_j++) {
-      //printf(". ", 0);
-      for (uint32_t delay_k = 0; delay_k < 1000; delay_k++) {
-        ;
-      }
-    }
-  }
   printf("\n\rStart Init SPI Controller\n\r", 0);
   *(spi_base_ptr) = 0x1;
 
@@ -42,16 +31,6 @@ void spi_init() {
   // enable spi
   *(spi_base_ptr + SPI_CR) = 0x86;
 
-  printf("\n\r****Insert SD Card Now!****\n\r", 0);
-  for (uint32_t delay_i = 0; delay_i < 15; delay_i++) {
-    printf("=", 0);
-    for (uint32_t delay_j = 0; delay_j < 300; delay_j++) {
-      //printf(". ", 0);
-      for (uint32_t delay_k = 0; delay_k < 1000; delay_k++) {
-        ;
-      }
-    }
-  }
   printf("\n\rSD Card Initialized!\n\r", 0);
   // power on SD
    *(spi_base_ptr) = 0x0;
