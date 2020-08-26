@@ -42,7 +42,7 @@ int main (void)
 
   cons_init(); //initialize consele
 
-  printf("=============== Minisys Rocket Chip ===============\n\r", 0);
+  printf("=============== MIPSfpga ===============\n\r", 0);
   printf("=============== DDR TEST ===============\n\r", 0);
   printf("DDR BASE VALUE:%d \r\n", *boot_file_buf);
   *boot_file_buf = 47;
@@ -58,7 +58,7 @@ int main (void)
   }
   
   // Open a file
-  printf("Loading boot.elf into memory...\n\r", 0);
+  printf("Loading vmlinux.elf into memory...\n\r", 0);
   fr = f_open(&fil, "vmlinux.elf", FA_READ);
   if (fr) {
     printf("Failed to open boot.elf!\n\r", 0);
@@ -82,7 +82,7 @@ int main (void)
   printf("%h from boot.elf \n\r", (uint32_t)boot_file_buf);
 
   // read elf
-  if(br = spi_load_elf(boot_file_buf, fil.fsize))
+  if(br = load_elf(boot_file_buf, fil.fsize))
     printf("elf read failed with code %d \n\r", br);
 
   // Close the file
