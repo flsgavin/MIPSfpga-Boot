@@ -66,22 +66,12 @@ check_for_tlb:
 
 start_init_tlb:
 	// Config1MMUSize == Number of TLB entries - 1
-	ext     v1, v0, CFG1_MMUSSHIFT, 6 // extract MMU Size
-	mtc0    zero, C0_ENTRYLO0		// write C0_EntryLo0
-	mtc0    zero, C0_ENTRYLO1		// write C0_EntryLo1
-	mtc0    zero, C0_PAGEMASK		// write C0_PageMask
-	mtc0    zero, C0_WIRED			// write C0_Wired
-	li	    a0, 0x80000000
+	???
 
 next_tlb_entry_pair:
-	mtc0    v1, C0_INDEX			// write C0_Index
-	mtc0	a0, C0_ENTRYHI			// write C0_EntryHi
-	ehb
-	tlbwi
-	add	    a0, (2<<13)				// Add 8K to the address to avoid TLB conflict with previous entry
+	
+	???
 
-	bne		v1, zero, next_tlb_entry_pair
-	add	    v1, -1
 
 done_init_tlb:
     jr      ra

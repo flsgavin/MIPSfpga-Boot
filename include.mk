@@ -1,5 +1,3 @@
-
-
 CROSS_COMPILE := mips-mti-elf-
 CC			  := $(CROSS_COMPILE)gcc
 CFLAGS  = -EL -g -march=m14kc -msoft-float -O1 -I . -G0

@@ -52,48 +52,30 @@ int main (void)
   printf("=============== FSBL ===============\n\r", 0);
 
   // Register work area to the default drive
-  if(f_mount(&FatFs, "", 1)) {
-    printf("Fail to mount SD driver!\n\r", 0);
-    return 1;
-  }
+
+  ???
   
   // Open a file
-  printf("Loading vmlinux.elf into memory...\n\r", 0);
-  fr = f_open(&fil, "vmlinux.elf", FA_READ);
-  if (fr) {
-    printf("Failed to open boot.elf!\n\r", 0);
-    return (int)fr;
-  }
+
+  ???
 
   // Read file into memory
-  uint8_t *buf = boot_file_buf;
-  uint32_t fsize = 0;           // file size count
-  uint32_t br;                  // Read count
-  do {
-    if( fsize % 1024 == 0 ) {
-      printf("Loading %d KB to memory address \r", fsize / 1024);
-    }
-    fr = f_read(&fil, buf, SD_READ_SIZE, &br);  // Read a chunk of source file
-    buf += br;
-    fsize += br;
-  } while(!(fr || br == 0));
+
+  ???
 
   printf("Load %d bytes to memory address ", fsize);
-  printf("%h from boot.elf \n\r", (uint32_t)boot_file_buf);
+  printf("%h from vmlinux.elf \n\r", (uint32_t)boot_file_buf);
 
   // read elf
-  if(br = load_elf(boot_file_buf, fil.fsize))
-    printf("elf read failed with code %d \n\r", br);
 
+  ???
   // Close the file
-  if(f_close(&fil)) {
-    printf("fail to close file!\n\r", 0);
-    return 1;
-  }
-  if(f_mount(NULL, "", 1)) {         // unmount it
-    printf("fail to umount disk!\n\r", 0);
-    return 1;
-  }
+ 
+  ???
+
+  // unmount it
+  
+  ???
 
   spi_disable();
   printf("=========== Jump to DDR ============\n\r", 0);

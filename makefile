@@ -10,15 +10,15 @@ objects		  := $(boot_dir)/*.o			  \
 				 
 .PHONY: all $(modules) clean run
 
-all: $(modules) vmlinux
+all: $(modules) bootloader
 
-vmlinux: $(modules)
-	$(LD) -EL -nostartfiles -N -T scse0_3.lds -G0 -o vmlinux.elf $(objects) 
-	$(OC) --remove-section .MIPS.abiflags --remove-section .reginfo vmlinux.elf
-	$(SZ) vmlinux.elf
-	$(OD) -D -l -t vmlinux.elf > vmlinux.dis
-	$(OD) -D vmlinux.elf > vmlinux.txt
-	$(OC) vmlinux.elf -O srec vmlinux.rec
+bootloader: $(modules)
+	$(LD) -EL -nostartfiles -N -T scse0_3.lds -G0 -o bootloader.elf $(objects) 
+	$(OC) --remove-section .MIPS.abiflags --remove-section .reginfo bootloader.elf
+	$(SZ) bootloader.elf
+	$(OD) -D -l -t bootloader.elf > bootloader.dis
+	$(OD) -D bootloader.elf > bootloader.txt
+	$(OC) bootloader.elf -O srec bootloader.rec
 
 $(modules): 
 	$(MAKE) --directory=$@
@@ -28,7 +28,7 @@ clean:
 		do					\
 			$(MAKE) --directory=$$d clean; \
 		done; \
-	rm -rf *.o *~ $(vmlinux_elf)  $(user_disk)
+	rm -rf *.o *~ $(bootloader_elf)  $(user_disk)
 
 
 include include.mk
